@@ -16,7 +16,7 @@ namespace gf {
 
         // int size() const;
         // bool empty() const;
-        void PushFront(T data);
+        // void PushFront(T data);
     };
 
 } // namespace gf
