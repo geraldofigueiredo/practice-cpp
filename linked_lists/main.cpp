@@ -1,8 +1,12 @@
 #include <iostream>
+#include <string>
 
 #include "src/linked_list.hpp"
 
 int main(int argc, char const *argv[]) {
-    std::cout << "Hello!\n";
+    
+    gf::LinkedList<int> list;
+    std::cout << "Test" << std::endl;
+
     return 0;
 }

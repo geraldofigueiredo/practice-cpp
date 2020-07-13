@@ -9,4 +9,9 @@ namespace gf {
     //     this->head_ = node;
     // }
 
+    // template<class T>
+    // int LinkedList<T>::Size() const {
+    //     return size;
+    // }
+
 } // namespace gf

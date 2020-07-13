@@ -12,9 +12,9 @@ namespace gf {
         int size;
     public:
         LinkedList() : head_(nullptr), size(0) {};
-        ~LinkedList();
+        ~LinkedList() = default;
 
-        // int size() const;
+        // int Size() const;
         // bool empty() const;
         // void PushFront(T data);
     };
