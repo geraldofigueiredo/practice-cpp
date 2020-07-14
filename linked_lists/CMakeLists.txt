@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.5)
 project(linked_lists_proj)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_definitions(-Werror)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cc)
 add_executable(linked_lists_run ${SOURCE_FILES})
 
 include_directories(src)
