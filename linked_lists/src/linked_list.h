@@ -25,6 +25,7 @@ public:
     T PopBack();
     T Front() const;
     T Back() const;
+    void Insert(const unsigned int index, const T value);
     void Print() const;
 };
 
@@ -110,7 +111,6 @@ void LinkedList<T>::PushBack(T data) {
     tail_->SetNext(new_node);
     tail_ = new_node;
     this->size++;
-    tail_->Print();
 }
 
 template<typename T>
@@ -148,6 +148,45 @@ T LinkedList<T>::Front() const {
 template<typename T>
 T LinkedList<T>::Back() const {
     return tail_->Value();
+}
+
+template<typename T>
+void LinkedList<T>::Insert(const unsigned int index, const T value) {
+    // front insertion
+    if (index == 0) {
+        this->PushFront(value);
+        return;
+    } 
+    // back insertion (this->size()-1 => 'tail index')
+    if (index == this->size()-1) {
+        this->PushBack(value);
+        return;
+    }
+
+    // middle insertion
+    auto *new_node = new ListElement<T>{value};
+    ListElement<T> *node = head_;
+    ListElement<T> *prev = nullptr;
+    // search the index
+    int position = 0;
+    while (node) {
+        if (position == index) {
+            break;
+        }
+
+        prev = node;
+        node = node->GetNext();
+        position++;
+    }
+
+    // index not found
+    if (node == nullptr) {
+        std::cerr << "index out of bounds!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    new_node->SetNext(node);
+    prev->SetNext(new_node);
 }
 
 template<typename T>
