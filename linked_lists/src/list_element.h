@@ -1,5 +1,4 @@
-#ifndef LIST_ELEMENT_HPP
-#define LIST_ELEMENT_HPP
+#pragma once
 
 #include <iostream>
 
@@ -30,5 +29,3 @@ namespace gf {
     int ListElement<T>::id_counter = 0;
 
 } // end namespace gf
-
-#endif
