@@ -70,6 +70,33 @@ void LinkedList<T>::PushBack(T data) {
 }
 
 template<typename T>
+T LinkedList<T>::PopBack() {
+    if (head_ == nullptr) {
+        std::cerr << "empty list!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    auto *currentNode = head_;
+    ListElement<T> *previousNode = nullptr;
+    while(currentNode->getNext()){
+        previousNode = currentNode;
+        currentNode = currentNode->getNext();
+    }
+
+    if (previousNode == nullptr) {
+        head_ = nullptr;
+        tail_ = nullptr;
+    } else {
+        tail_ = previousNode;
+        previousNode->setNext(nullptr);
+    }
+
+    T value = currentNode->getValue();
+    delete currentNode;
+    return value;
+}
+
+template<typename T>
 void LinkedList<T>::Print() const {
     auto *currentNode = head_;
     while (currentNode != nullptr) {
