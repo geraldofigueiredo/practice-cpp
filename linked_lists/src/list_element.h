@@ -16,7 +16,7 @@ namespace gf {
         ~ListElement() {};
 
         ListElement* GetNext() const { return next_; }
-        const T& Calue() const { return data; }
+        const T& Value() const { return data; }
         void SetNext(ListElement *elem) { next_ = elem; }
         void SetValue(const T &value) { data = value; }
 

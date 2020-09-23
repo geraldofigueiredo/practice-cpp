@@ -51,24 +51,32 @@ bool LinkedList<T>::Empty() const {
 
 template<typename T>
 T LinkedList<T>::ValueAt(const unsigned int index) const {
-    if (this->Empty()) {
-        std::cerr << "Empty list!" << std::endl;
+    ListElement<T> *node = head_;
+    int position = 0;
+    while (node) {
+        if (position == index){
+            break;
+        }
+        
+        node = node->GetNext();
+        position++;
+    }
+
+    if (node == nullptr) {
+        std::cerr << "index out of bounds!" << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    ListElement<T> *node = head_;
-    while (node->getNext()) {
-        
-    }
+    return node->Value();
 }
 
 // O(1) front insertion
 template<typename T>
 void LinkedList<T>::PushFront(T data) {
     auto *newNode = new ListElement<T>{data};
-    newNode->setNext(head_);
+    newNode->SetNext(head_);
     head_ = newNode;
-    this->Size++;
+    this->size++;
 }
 
 // O(1) Front remotion
@@ -79,8 +87,8 @@ T LinkedList<T>::PopFront() {
         exit(EXIT_FAILURE);
     }
     ListElement<T> *node = head_;
-    T value = head_->getValue();
-    head_ = head_->getNext();
+    T value = head_->Value();
+    head_ = head_->GetNext();
 
     delete node;
     return value;
@@ -89,10 +97,18 @@ T LinkedList<T>::PopFront() {
 // O(1) end insertion
 template<typename T>
 void LinkedList<T>::PushBack(T data) {
-    auto *newNode = new ListElement<T>{data};
-    newNode->setNext(tail_);
-    tail_ = newNode;
-    this->Size++;
+    auto *new_node = new ListElement<T>{data};
+    
+    if (tail_ == nullptr) {
+        head_ = new_node;
+        tail_ = new_node;
+        return;
+    }
+
+    tail_->SetNext(new_node);
+    tail_ = new_node;
+    this->size++;
+    tail_->Print();
 }
 
 template<typename T>
@@ -104,9 +120,9 @@ T LinkedList<T>::PopBack() {
 
     auto *currentNode = head_;
     ListElement<T> *previousNode = nullptr;
-    while(currentNode->getNext()){
+    while(currentNode->GetNext()){
         previousNode = currentNode;
-        currentNode = currentNode->getNext();
+        currentNode = currentNode->GetNext();
     }
 
     if (previousNode == nullptr) {
@@ -114,10 +130,10 @@ T LinkedList<T>::PopBack() {
         tail_ = nullptr;
     } else {
         tail_ = previousNode;
-        previousNode->setNext(nullptr);
+        previousNode->SetNext(nullptr);
     }
 
-    T value = currentNode->getValue();
+    T value = currentNode->Value();
     delete currentNode;
     return value;
 }
@@ -127,7 +143,7 @@ void LinkedList<T>::Print() const {
     auto *currentNode = head_;
     while (currentNode != nullptr) {
         currentNode->Print();
-        currentNode = currentNode->getNext();
+        currentNode = currentNode->GetNext();
         if (currentNode != nullptr)
             std::cout << " -> ";
     }
