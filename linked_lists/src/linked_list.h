@@ -23,6 +23,8 @@ public:
     T PopFront();
     void PushBack(T data);
     T PopBack();
+    T Front() const;
+    T Back() const;
     void Print() const;
 };
 
@@ -136,6 +138,16 @@ T LinkedList<T>::PopBack() {
     T value = currentNode->Value();
     delete currentNode;
     return value;
+}
+
+template<typename T>
+T LinkedList<T>::Front() const {
+    return head_->Value();
+}
+
+template<typename T>
+T LinkedList<T>::Back() const {
+    return tail_->Value();
 }
 
 template<typename T>
