@@ -26,6 +26,7 @@ public:
     T Front() const;
     T Back() const;
     void Insert(const unsigned int index, const T value);
+    void Erase(const unsigned int index);
     void Print() const;
 };
 
@@ -187,6 +188,13 @@ void LinkedList<T>::Insert(const unsigned int index, const T value) {
 
     new_node->SetNext(node);
     prev->SetNext(new_node);
+}
+
+template<typename T>
+void LinkedList<T>::Erase(const unsigned int index) {
+    if (index == 0) {
+        this->PushFront();
+    }
 }
 
 template<typename T>
