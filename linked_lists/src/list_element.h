@@ -15,12 +15,12 @@ namespace gf {
         ListElement(const T &value) : next_(nullptr), data(value), id(id_counter++) {};
         ~ListElement() {};
 
-        ListElement* getNext() const { return next_; }
-        const T& value() const { return data; }
-        void setNext(ListElement *elem) { next_ = elem; }
-        void setValue(const T &value) { data = value; }
+        ListElement* GetNext() const { return next_; }
+        const T& Calue() const { return data; }
+        void SetNext(ListElement *elem) { next_ = elem; }
+        void SetValue(const T &value) { data = value; }
 
-        void print() const {
+        void Print() const {
             std::cout << "[" << this->id << " (" << data << ")]";
         }
     };

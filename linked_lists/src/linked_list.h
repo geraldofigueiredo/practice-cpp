@@ -14,16 +14,29 @@ private:
     int size;
 public:
     LinkedList() : head_(nullptr), tail_(nullptr), size(0) {};
-    ~LinkedList() = default;
+    ~LinkedList();
 
     int Size() const;
     bool Empty() const;
+    T ValueAt(const unsigned int index) const;
     void PushFront(T data);
     T PopFront();
     void PushBack(T data);
     T PopBack();
     void Print() const;
 };
+
+template<typename T>
+LinkedList<T>::~LinkedList(){
+    ListElement<T> *current = head_;
+    ListElement<T> *next = nullptr;
+
+    while(current) {
+        next = current->GetNext();
+        delete current;
+        current = next;
+    }
+}
 
 // Methods definition
 template<typename T>
@@ -36,20 +49,33 @@ bool LinkedList<T>::Empty() const {
     return this->size == 0;
 }
 
+template<typename T>
+T LinkedList<T>::ValueAt(const unsigned int index) const {
+    if (this->Empty()) {
+        std::cerr << "Empty list!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    ListElement<T> *node = head_;
+    while (node->getNext()) {
+        
+    }
+}
+
 // O(1) front insertion
 template<typename T>
 void LinkedList<T>::PushFront(T data) {
     auto *newNode = new ListElement<T>{data};
     newNode->setNext(head_);
     head_ = newNode;
-    this->size++;
+    this->Size++;
 }
 
 // O(1) Front remotion
 template<typename T>
 T LinkedList<T>::PopFront() {
     if (head_ == nullptr) {
-        std::cerr << "empty list!" << std::endl;
+        std::cerr << "Empty list!" << std::endl;
         exit(EXIT_FAILURE);
     }
     ListElement<T> *node = head_;
@@ -66,13 +92,13 @@ void LinkedList<T>::PushBack(T data) {
     auto *newNode = new ListElement<T>{data};
     newNode->setNext(tail_);
     tail_ = newNode;
-    this->size++;
+    this->Size++;
 }
 
 template<typename T>
 T LinkedList<T>::PopBack() {
     if (head_ == nullptr) {
-        std::cerr << "empty list!" << std::endl;
+        std::cerr << "Empty list!" << std::endl;
         exit(EXIT_FAILURE);
     }
 
@@ -100,7 +126,7 @@ template<typename T>
 void LinkedList<T>::Print() const {
     auto *currentNode = head_;
     while (currentNode != nullptr) {
-        currentNode->print();
+        currentNode->Print();
         currentNode = currentNode->getNext();
         if (currentNode != nullptr)
             std::cout << " -> ";
