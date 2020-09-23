@@ -19,9 +19,9 @@ public:
     int Size() const;
     bool Empty() const;
     void PushFront(T data);
-    void PopFront();
+    T PopFront();
     void PushBack(T data);
-    void PopBack();
+    T PopBack();
     void Print() const;
 };
 
@@ -36,6 +36,7 @@ bool LinkedList<T>::Empty() const {
     return this->size == 0;
 }
 
+// O(1) front insertion
 template<typename T>
 void LinkedList<T>::PushFront(T data) {
     auto *newNode = new ListElement<T>{data};
@@ -44,6 +45,22 @@ void LinkedList<T>::PushFront(T data) {
     this->size++;
 }
 
+// O(1) Front remotion
+template<typename T>
+T LinkedList<T>::PopFront() {
+    if (head_ == nullptr) {
+        std::cerr << "empty list!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    ListElement<T> *node = head_;
+    T value = head_->getValue();
+    head_ = head_->getNext();
+
+    delete node;
+    return value;
+}
+
+// O(1) end insertion
 template<typename T>
 void LinkedList<T>::PushBack(T data) {
     auto *newNode = new ListElement<T>{data};
