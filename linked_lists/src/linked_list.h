@@ -159,7 +159,7 @@ void LinkedList<T>::Insert(const unsigned int index, const T value) {
         return;
     } 
     // back insertion (this->size()-1 => 'tail index')
-    if (index == this->size()-1) {
+    if (index == this->size-1) {
         this->PushBack(value);
         return;
     }
@@ -194,6 +194,12 @@ template<typename T>
 void LinkedList<T>::Erase(const unsigned int index) {
     if (index == 0) {
         this->PushFront();
+        return;
+    }
+
+    if (index == this->size - 1) {
+        this->PopBack();
+        return
     }
 }
 
